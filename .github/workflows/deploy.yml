@@ -20,9 +20,9 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: ./
+        server-dir: htdocs/
         local-dir: ./
-        state-name: .ftp-deploy-sync-state.json
+        state-name: ftp-deploy-sync-state.json
         dangerous-clean-slate: false
         exclude: |
           **/.git*
@@ -33,5 +33,3 @@ jobs:
           config/database.php
           .env*
           uploads/**
-          !uploads/.gitkeep
-          !uploads/*/.gitkeep
