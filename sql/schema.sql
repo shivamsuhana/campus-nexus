@@ -3,8 +3,9 @@
 -- Unified Smart Campus Ecosystem
 -- ============================================
 
-CREATE DATABASE IF NOT EXISTS campusnexus;
-USE campusnexus;
+-- Note: For shared hosting, database must be created via control panel
+-- CREATE DATABASE IF NOT EXISTS campusnexus;
+-- USE campusnexus;
 
 -- ============================================
 -- 1. USERS TABLE
