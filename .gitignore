@@ -1,19 +1,57 @@
-# Uploads
+# ============================================
+# SENSITIVE FILES - NEVER COMMIT TO GITHUB
+# ============================================
+
+# Database Configuration (Contains credentials!)
+config/database.php
+config/database.local.php
+config/.env.local
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# User Uploads (Large binary files)
 uploads/*
 !uploads/.gitkeep
 !uploads/*/.gitkeep
 
-# Environment
-.env
-config/database.local.php
-
-# IDE
+# ============================================
+# IDE & EDITOR FILES
+# ============================================
 .idea/
 .vscode/
-*.swp
-*.swo
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
 
-# Logs
+# ============================================
+# LOG FILES & TEMP
+# ============================================
 *.log
+debug.log
+error.log
+logs/
+temp/
+tmp/
+
+# ============================================
+# SYSTEM FILES
+# ============================================
+.DS_Store
+.env.backup
+*.bak
+*.tmp
+
+# ============================================
+# PHP DEVELOPMENT
+# ============================================
+composer.lock
+vendor/
+node_modules/
+.phpunit.result.cache
