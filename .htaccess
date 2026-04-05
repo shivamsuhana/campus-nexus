@@ -1,0 +1,25 @@
+Options -Indexes
+RewriteEngine On
+
+# Force HTTPS (uncomment on production)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Prevent access to config files
+<FilesMatch "\.(sql|md|json|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Prevent access to includes/config directories
+<IfModule mod_rewrite.c>
+    RewriteRule ^(includes|config|sql)/ - [F,L]
+</IfModule>
+
+# PHP Settings
+php_value upload_max_filesize 5M
+php_value post_max_size 8M
+php_value max_execution_time 30
+
+# Custom Error Pages
+ErrorDocument 404 /project/404.php

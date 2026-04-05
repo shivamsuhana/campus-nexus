@@ -1,0 +1,160 @@
+/* ============================================
+   CampusNexus — Animations
+   Keyframes, Scroll reveals, Transitions
+   ============================================ */
+
+/* Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Scale */
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Gradient shift */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.4); }
+}
+
+/* Float */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Slide in from right (for flash messages) */
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Spin (for loading spinners) */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Shimmer (loading skeleton) */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Count up animation marker */
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll reveal classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger animation delays */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+.stagger-7 { transition-delay: 0.7s; }
+.stagger-8 { transition-delay: 0.8s; }
+
+/* Skeleton loading */
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-glass) 25%, var(--bg-glass-hover) 50%, var(--bg-glass) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-md);
+}
+
+.skeleton-text { height: 14px; margin-bottom: 8px; border-radius: var(--radius-xs); }
+.skeleton-text:last-child { width: 60%; }
+.skeleton-title { height: 24px; width: 70%; margin-bottom: 12px; }
+.skeleton-avatar { width: 48px; height: 48px; border-radius: var(--radius-full); }
+.skeleton-image { width: 100%; height: 200px; }
+
+/* Hover scale effect */
+.hover-scale { transition: transform var(--transition-base); }
+.hover-scale:hover { transform: scale(1.02); }
+
+/* Hover lift effect */
+.hover-lift { transition: transform var(--transition-base), box-shadow var(--transition-base); }
+.hover-lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+/* Hover glow */
+.hover-glow { transition: box-shadow var(--transition-base); }
+.hover-glow:hover { box-shadow: var(--shadow-glow); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .reveal, .reveal-left, .reveal-right {
+        opacity: 1; transform: none;
+    }
+}

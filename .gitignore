@@ -1,0 +1,19 @@
+# Uploads
+uploads/*
+!uploads/.gitkeep
+!uploads/*/.gitkeep
+
+# Environment
+.env
+config/database.local.php
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

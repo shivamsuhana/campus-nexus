@@ -1,0 +1,159 @@
+/* ============================================
+   CampusNexus — Admin Panel Styles
+   Enhanced tables, stat cards, controls
+   ============================================ */
+
+/* Admin page header */
+.admin-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.admin-header h1 {
+    font-size: var(--text-3xl);
+}
+
+/* Enhanced admin tables */
+.page-content.with-sidebar .table td {
+    vertical-align: middle;
+}
+
+.page-content.with-sidebar .table th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--bg-tertiary);
+}
+
+/* Admin action buttons in tables */
+.page-content.with-sidebar .table td form {
+    display: inline-flex;
+}
+
+.page-content.with-sidebar .table td .btn-sm {
+    padding: 4px 10px;
+}
+
+/* Admin stat cards — gradient borders */
+.page-content.with-sidebar .stat-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.page-content.with-sidebar .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-start), var(--primary-end));
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.page-content.with-sidebar .stat-card:hover::after {
+    opacity: 1;
+}
+
+/* Admin badges inline */
+.admin-badge-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+/* Empty admin state */
+.admin-empty {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--text-muted);
+}
+
+.admin-empty i {
+    font-size: 48px;
+    margin-bottom: var(--space-md);
+    opacity: 0.3;
+}
+
+/* Admin quick info card */
+.admin-info-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--bg-glass);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-glass);
+    margin-bottom: var(--space-sm);
+    transition: all var(--transition-fast);
+}
+
+.admin-info-card:hover {
+    border-color: var(--border-glass-hover);
+    background: var(--bg-glass-hover);
+}
+
+/* Table row status indicators */
+.table tbody tr[data-status="pending"] {
+    border-left: 3px solid var(--warning);
+}
+
+.table tbody tr[data-status="open"] {
+    border-left: 3px solid var(--danger);
+}
+
+/* Admin control panel grid */
+.admin-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.admin-control-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all var(--transition-base);
+    text-align: center;
+}
+
+.admin-control-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-glass-hover);
+    color: var(--text-primary);
+}
+
+.admin-control-card i {
+    font-size: var(--text-2xl);
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-md);
+}
+
+.admin-control-card span {
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.admin-control-card p {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .admin-controls {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
