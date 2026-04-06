@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'] ?? '';
     $confirm = $_POST['confirm_password'] ?? '';
-    $role = in_array($_POST['role'] ?? '', ['student','faculty']) ? $_POST['role'] : 'student';
+    $role = 'student'; // Unconditionally set role to student
     $department = sanitize($_POST['department'] ?? 'General');
     
     $errors = [];
@@ -116,30 +116,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="form-error" id="email-error"></div>
                     </div>
                     
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="role" class="form-label">Role <span class="required">*</span></label>
-                            <div class="input-icon-wrapper">
-                                <i class="fas fa-id-badge"></i>
-                                <select id="role" name="role" class="form-control form-control-icon" required>
-                                    <option value="student" <?= ($_POST['role'] ?? '') === 'student' ? 'selected' : '' ?>>Student</option>
-                                    <option value="faculty" <?= ($_POST['role'] ?? '') === 'faculty' ? 'selected' : '' ?>>Faculty</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group" style="min-width:180px;">
-                            <label for="department" class="form-label">Department</label>
-                            <div class="input-icon-wrapper">
-                                <i class="fas fa-building"></i>
-                                <select id="department" name="department" class="form-control form-control-icon">
-                                    <option value="Computer Science">Computer Science</option>
-                                    <option value="Electronics">Electronics</option>
-                                    <option value="Mechanical">Mechanical</option>
-                                    <option value="Civil">Civil</option>
-                                    <option value="Electrical">Electrical</option>
-                                    <option value="General">General</option>
-                                </select>
-                            </div>
+                    <div class="form-group">
+                        <label for="department" class="form-label">Department</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-building"></i>
+                            <select id="department" name="department" class="form-control form-control-icon">
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="General">General</option>
+                            </select>
                         </div>
                     </div>
                     
