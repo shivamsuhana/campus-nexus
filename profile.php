@@ -12,6 +12,40 @@ $user = $stmt->fetch();
 // Handle profile update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        if (isset($_POST['change_password'])) {
+            $currentPassword = $_POST['current_password'] ?? '';
+            $newPassword = $_POST['new_password'] ?? '';
+            $confirmPassword = $_POST['confirm_password'] ?? '';
+
+            if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
+                throw new Exception('All password fields are required.');
+            }
+            if ($newPassword !== $confirmPassword) {
+                throw new Exception('New password and confirmation do not match.');
+            }
+            if (strlen($newPassword) < 6) {
+                throw new Exception('New password must be at least 6 characters.');
+            }
+
+            // Verify current password
+            $stmt = $db->prepare("SELECT password FROM users WHERE id = ?");
+            $stmt->execute([$userId]);
+            $dbUser = $stmt->fetch();
+
+            if (!password_verify($currentPassword, $dbUser['password'])) {
+                throw new Exception('Incorrect current password.');
+            }
+
+            // Update to new password (hashed)
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $stmt = $db->prepare("UPDATE users SET password = ? WHERE id = ?");
+            $stmt->execute([$hashedPassword, $userId]);
+
+            setFlashMessage('success', 'Password successfully updated!');
+            header('Location: profile.php');
+            exit;
+        }
+
         $name = sanitize($_POST['name'] ?? '');
         $bio = sanitize($_POST['bio'] ?? '');
         $department = sanitize($_POST['department'] ?? '');
@@ -176,6 +210,33 @@ $myGrievances = $myGrievances->fetchAll();
                     <textarea id="bio" name="bio" class="form-control" rows="3" placeholder="Tell us about yourself..."><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+            </form>
+            
+            <hr style="margin: var(--space-xl) 0; border: 0; border-top: 1px solid var(--border-color);">
+
+            <h3 style="margin-bottom:var(--space-md);">Change Password</h3>
+            <form method="POST">
+                <input type="hidden" name="change_password" value="1">
+                
+                <div class="form-group" style="max-width: 400px;">
+                    <label class="form-label">Current Password</label>
+                    <input type="password" name="current_password" class="form-control" required>
+                </div>
+                
+                <div class="form-row" style="max-width: 400px;">
+                    <div class="form-group">
+                        <label class="form-label">New Password</label>
+                        <input type="password" name="new_password" class="form-control" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm New Password</label>
+                        <input type="password" name="confirm_password" class="form-control" required minlength="6">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="margin-top:var(--space-sm);">
+                    <i class="fas fa-key"></i> Update Password
+                </button>
             </form>
         </div>
     </div>
